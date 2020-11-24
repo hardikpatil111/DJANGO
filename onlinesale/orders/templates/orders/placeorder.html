@@ -1,0 +1,32 @@
+{% extends 'layout/layout.html' %}
+{% block mainblock %}
+{% if request.user.is_authenticated %}
+    <h3>Order ID : {{order_obj.order_id}}</h3>
+    <h3>Sub Total : {{order_obj.order_total}}</h3>
+    <h3>Total(18%) : {{order_obj.total}}</h3>
+    {% if order_obj.address %}
+        {{order_obj.address.get_address|linebreaks}}
+        {% include 'orders/paynow.html' with object=order.obj%}
+    {% else %}
+        <div class="row">
+            <div class="col">
+                <h5>Add New Address</h5>
+                {% include 'addresses/addAddress.html' with form=addressForm next_url=build_absolute_uri %}
+            </div>
+            <div class="col">
+                <h5>Select Address</h5>
+                {% include 'addresses/selectAddress.html' with addList=addList next_url=request.build_absolute_url %}
+            </div>
+        </div>
+    {% endif %}
+{% else %}
+<div class="col-5">
+    <form method="POST" action="{% url 'signin' %}">
+        {% csrf_token %}
+        {{loginform}}
+        <input type="submit" value="Login" class="btn btn-primary"/>
+        <input type="hidden" name="next_url" value="{{request.build_absolute_uri}}"/>
+    </form>
+</div>
+{% endif %}
+{% endblock %}

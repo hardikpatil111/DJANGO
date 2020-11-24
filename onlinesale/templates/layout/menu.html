@@ -1,0 +1,139 @@
+{% load static %}
+<style>
+  .header{
+    width: 100%;
+    height: 100vh;
+    background-image: url("{% static 'img/back.jpg' %}");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    clip-path: polygon(100% 0%,100% 77%,50% 100%,0 75%,0 0);
+    position: relative;
+   }
+.header:before{
+  content: "";
+  position: absolute;
+  top: 20%;
+  opacity: .3%%
+  bottom: 0%;
+  left: 0%;
+  right:0%;
+  z-index: -1;
+  background:linear-gradient(to right,#1e5799 0%, #3ccdbb 0%, #16c9f6 100%);
+ }
+  nav {
+    float: left;
+    width: 100%;
+    height: 438px; 
+    background: #ccc;
+    padding: 10px;
+    opacity: .100%%;
+  }
+
+  nav ul {
+    list-style-type: circle;
+    padding: 10px;
+  }
+
+  @media (max-width: 600px) {
+    nav, article {
+      width: 100%;
+      height: auto;
+    }
+  }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding-left: 32%;
+    overflow: hidden
+    background-color: #003300;
+    width: 100;
+    font-size: 25px;
+    opacity: .100%%
+  }
+
+  li {
+    float: left;
+  }
+
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  li a:hover {
+    background-color: #111;
+    border-style: solid;
+    border-radius: 40px;
+  }
+
+ .border-10{
+  border-color: black;
+  border-style:solid;
+  border-width: 2px;
+  border-radius: 3px; 
+  padding: 5px;
+ }
+
+</style>
+
+<div class="header" id="topheader">
+  <nav class="navbar navbar-expand-lg ">
+  <div class="container text-uppercase">
+    <a class="navbar-brand text-white font-weight-bold border-10" href="#">
+      <!-- <img src="{% static 'img/logo.png' %}" width="50%" class="d-inline-block align-top" alt=""> -->
+    </a>
+ 
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent ">
+    <ul class="navbar-nav ml-auto ">
+      <li class="nav-item active">
+        <a class="nav-link text-white" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link text-white" href="{% url 'about' %}">About <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link text-white" href="{% url 'contact' %}">Contact <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link text-white" href="{% url 'product:fbv' %}">FBV Products <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link text-white" href="{% url 'product:cbv' %}">CBV Products <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'cart:list' %}">
+          <i class="fa fa-shopping-cart" ></i>
+        </a>
+      </li>
+      {% if request.user.is_authenticated %}
+        <li class="nav-item active">
+          <a class="nav-link text-white" href="{% url 'signout' %}">sign out <span class="sr-only">(current)</span></a>
+        </li>
+      {% else %}
+        <li class="nav-item active">
+        <a class="nav-link text-white" href="{% url 'register' %}">sign up <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+        <a class="nav-link text-white" href="{% url 'signin' %}">sign in <span class="sr-only">(current)</span></a>
+        </li>
+      {% endif %}
+    </ul>
+    {% include 'search/search.html' with query=query %}
+    </div>
+  </div>
+  </nav>
+  <section class="header-section">
+    <div class="center-div">
+        <h1 class="font-weight-bold text-center text-white">Welcome to Hardik's Kitchen</h1>
+        <p> We Create Hunger</p>
+    </div>
+</section>
+ 
+</div>

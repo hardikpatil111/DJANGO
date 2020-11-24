@@ -1,0 +1,10 @@
+{% extends 'layout/layout.html' %}
+{% block mainblock %}
+    {% if request.user.is_authenticated %}
+    <div class="alert alert-success"role="alert">
+        welcome {{user.get_full_name}}
+    </div>
+    {% endif %}
+    <h4>how r u</h4>
+    <h6>{{content|linebreaks}}</h6>
+{% endblock %}
